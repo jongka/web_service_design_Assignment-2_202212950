@@ -110,7 +110,7 @@ npm run db:reset
 |---|---|---|
 | 직접 구현 | `src/application-service.js` | TODO-01~04(`apply`, `cancel`, `approve`, `revoke`) 구현, 트랜잭션 함수 `tx()`, 담당자 검사 `managedApplication()`, 대기자 선택 `nextWaiting()` 추가 |
 | 제공 코드 그대로 | `src/app.js`, `src/auth.js`, `src/db.js`, `src/repository.js`, `src/server.js`, `public/`, `tests/`, `scripts/` | 수정하지 않음 |
-| 추가 (저장소 루트) | `evidence/`, `evidence/tools/` | 검증 증거와 캡처 도구. 서비스 코드와 별개 |
+| 추가 (저장소 루트) | `evidence/` | 검증 증거(화면 캡처, 테스트 출력). 서비스 코드와 별개 |
 
 ### 구현 완료 여부
 
@@ -139,7 +139,6 @@ Windows 11, Node.js v24.21.0, npm. 설치·실행·DB 초기화 방법은 위의
 
 - 보고서: [`docs/report.pdf`](../docs/report.pdf)
 - 증거: [`evidence/`](../evidence/): 화면 캡처 `T01-main.png` ~ `U05-2-history.png`, 자동 테스트 출력 `TEST-*.txt`/`.png`
-- 캡처 재현 방법: [`evidence/tools/README.md`](../evidence/tools/README.md)
 
 ### AI 사용 요약
 
@@ -147,7 +146,7 @@ Claude Code(Claude Opus 5.5)를 사용했습니다.
 
 - 과제 안내문 정리, `src/application-service.js`의 TODO 4개 구현, 코드 리뷰
 - 다이어그램(상태 전이도, 승인 취소 시퀀스) 작성
-- 증거 캡처 스크립트(`evidence/tools/`) 작성과 실행
+- 증거 화면 캡처 자동화 스크립트 작성과 실행
 
 AI가 작성한 코드는 위 세 가지 테스트를 직접 실행해 확인했습니다. 자세한 적용 위치와 검증 내용은 보고서의 "AI 활용과 참고 자료"에 있습니다.
 
