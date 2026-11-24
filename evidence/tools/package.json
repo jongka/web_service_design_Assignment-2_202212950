@@ -1,0 +1,12 @@
+{
+  "name": "assignment2-evidence-tools",
+  "private": true,
+  "description": "evidence/ 폴더의 화면 캡처와 테스트 출력을 다시 만드는 도구 (과제 채점 대상 코드 아님)",
+  "scripts": {
+    "capture": "node capture.js",
+    "testout": "node testout.js"
+  },
+  "dependencies": {
+    "playwright-core": "1.49.1"
+  }
+}
