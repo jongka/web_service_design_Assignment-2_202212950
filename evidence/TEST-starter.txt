@@ -1,0 +1,37 @@
+PS starter> node --version
+v24.21.0
+PS starter> node --test --test-reporter=tap tests/starter.test.js
+TAP version 13
+# Subtest: 기본 실행: health와 초기 행사 2개
+ok 1 - 기본 실행: health와 초기 행사 2개
+  ---
+  duration_ms: 836.8233
+  type: 'test'
+  ...
+# Subtest: 로그인: 정상 사용자, 잘못된 암호, 토큰 누락·변조
+ok 2 - 로그인: 정상 사용자, 잘못된 암호, 토큰 누락·변조
+  ---
+  duration_ms: 768.2229
+  type: 'test'
+  ...
+# Subtest: 조회 권한: 학생은 운영자 명단을 읽을 수 없음
+ok 3 - 조회 권한: 학생은 운영자 명단을 읽을 수 없음
+  ---
+  duration_ms: 685.1354
+  type: 'test'
+  ...
+# Subtest: 입력 계약: 신원·상태 위조 필드 거부, 저장 변경 없음
+ok 4 - 입력 계약: 신원·상태 위조 필드 거부, 저장 변경 없음
+  ---
+  duration_ms: 712.9467
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3672.6769
