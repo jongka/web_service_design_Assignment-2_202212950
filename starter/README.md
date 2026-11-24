@@ -138,7 +138,7 @@ Windows 11, Node.js v24.21.0, npm. 설치·실행·DB 초기화 방법은 위의
 ### 보고서와 검증 증거
 
 - 보고서: [`docs/report.pdf`](../docs/report.pdf)
-- 증거: [`evidence/`](../evidence/) — 화면 캡처 `T01-main.png` ~ `U05-2-history.png`, 자동 테스트 출력 `TEST-*.txt`/`.png`
+- 증거: [`evidence/`](../evidence/): 화면 캡처 `T01-main.png` ~ `U05-2-history.png`, 자동 테스트 출력 `TEST-*.txt`/`.png`
 - 캡처 재현 방법: [`evidence/tools/README.md`](../evidence/tools/README.md)
 
 ### AI 사용 요약
