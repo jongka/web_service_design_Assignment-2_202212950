@@ -98,11 +98,58 @@ npm run db:reset
 - `tests/`: 기반·필수·선택 심화 테스트
 - `docs/API.md`: 상태·이력·입출력 계약
 
-## 제출 전 작성할 내용
+## 제출 정보
 
-이 부분을 본인의 서비스 소개, 변경 파일, 구현 완료 여부, 실행 환경, 알려진 문제, 보고서·검증 증거 링크와 AI 사용 요약으로 바꾸세요. GitHub URL·커밋 SHA를 LMS에 제출하고 보고서 PDF를 저장소 `docs/report.pdf`와 LMS에 같은 버전으로 첨부합니다.
+### 서비스 소개
 
-`node_modules`, 생성 DB·서명 키, 실제 `.env`·JWT와 개인 정보는 제출하지 않습니다. 제공 코드와 직접 구현한 부분을 구분합니다.
+학생이 행사에 참가를 신청하고, 담당 운영자가 정원 안에서 승인하거나 승인을 취소하는 서비스입니다. 승인을 취소하면 같은 행사에서 가장 먼저 신청한 대기자 한 명이 자동으로 승인되고, 성공한 모든 상태 변경은 변경 이력으로 저장됩니다.
+
+### 변경 파일
+
+| 구분 | 파일 | 내용 |
+|---|---|---|
+| 직접 구현 | `src/application-service.js` | TODO-01~04(`apply`, `cancel`, `approve`, `revoke`) 구현, 트랜잭션 함수 `tx()`, 담당자 검사 `managedApplication()`, 대기자 선택 `nextWaiting()` 추가 |
+| 제공 코드 그대로 | `src/app.js`, `src/auth.js`, `src/db.js`, `src/repository.js`, `src/server.js`, `public/`, `tests/`, `scripts/` | 수정하지 않음 |
+| 추가 (저장소 루트) | `evidence/`, `evidence/tools/` | 검증 증거와 캡처 도구. 서비스 코드와 별개 |
+
+### 구현 완료 여부
+
+| 항목 | 상태 |
+|---|---|
+| 신청·대기 취소·직접 승인·승인 취소 | 완료 |
+| 대기열 자동 승급 (`created_at ASC, id ASC`, 요청당 최대 1명) | 완료 |
+| 변경 이력과 원인 이력 연결 (`causeHistoryId`) | 완료 |
+| 상태·이력 트랜잭션과 실패 시 전체 롤백 | 완료 (`BEGIN IMMEDIATE` ~ `COMMIT`/`ROLLBACK`) |
+| `npm test` (기반 4건) | 4/4 통과 |
+| `npm run test:assignment` (필수 32건) | 32/32 통과 |
+| `npm run test:advanced` (선택 심화) | 1/1 통과 |
+| 화면 검증 U01~U05 | 완료 (증거: `evidence/U01-*` ~ `U05-*`) |
+
+### 실행 환경
+
+Windows 11, Node.js v24.21.0, npm. 설치·실행·DB 초기화 방법은 위의 [실행](#실행)과 [DB 초기화](#db-초기화와-이전-코드에서의-전환) 절을 따릅니다. 별도 설정 파일은 필요 없습니다.
+
+### 알려진 문제
+
+- `npm start` 시작 로그에 "TODO 구현 전 501입니다"라는 제공 코드의 안내 문구가 그대로 출력됩니다. 기능은 구현되어 있으며 제공 코드(`src/server.js`)라서 수정하지 않았습니다.
+- 디스크 부족 등으로 SQLite가 트랜잭션을 스스로 먼저 되돌린 경우, `ROLLBACK` 오류가 원래 오류 대신 로그에 남을 수 있습니다. 데이터와 응답(500)은 정상입니다.
+- 동시 승인 보호는 같은 SQLite 파일을 쓰는 프로세스 사이에서만 유효하며, 잠금 대기가 5초(`busy_timeout`)를 넘으면 500이 날 수 있습니다.
+
+### 보고서와 검증 증거
+
+- 보고서: [`docs/report.pdf`](../docs/report.pdf)
+- 증거: [`evidence/`](../evidence/) — 화면 캡처 `T01-main.png` ~ `U05-2-history.png`, 자동 테스트 출력 `TEST-*.txt`/`.png`
+- 캡처 재현 방법: [`evidence/tools/README.md`](../evidence/tools/README.md)
+
+### AI 사용 요약
+
+Claude Code(Claude Opus 5.5)를 사용했습니다.
+
+- 과제 안내문 정리, `src/application-service.js`의 TODO 4개 구현, 코드 리뷰
+- 보고서 초안과 다이어그램(상태 전이도, 승인 취소 시퀀스) 작성
+- 증거 캡처 스크립트(`evidence/tools/`) 작성과 실행
+
+AI가 작성한 코드는 위 세 가지 테스트를 직접 실행해 확인했습니다. 자세한 적용 위치와 검증 내용은 보고서의 "AI 활용과 참고 자료"에 있습니다.
 
 ## 참고 문서
 
